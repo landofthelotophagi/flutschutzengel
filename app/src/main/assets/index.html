@@ -1,0 +1,350 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>ArcGIS API for a scene</title>
+  <style>
+    html, body, #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://js.arcgis.com/4.21/esri/themes/light/main.css">
+  <script src="https://js.arcgis.com/4.21/"></script>
+
+  <script>
+    require([
+      "esri/config",
+      "esri/Map",
+      "esri/views/MapView", 
+      "esri/Graphic", 
+      "esri/layers/GraphicsLayer",
+      "esri/layers/FeatureLayer",
+      "esri/views/SceneView",
+      "esri/layers/ElevationLayer",
+      "esri/layers/BaseElevationLayer",
+      "esri/Basemap",
+      "esri/layers/TileLayer",
+      "esri/widgets/BasemapToggle",
+      "esri/widgets/BasemapGallery"
+  ], function(esriConfig,Map, MapView, Graphic, GraphicsLayer, FeatureLayer, SceneView,ElevationLayer, BaseElevationLayer, Basemap, TileLayer,BasemapToggle, BasemapGallery) {
+      esriConfig.apiKey = "AAPK6e70f2b3e075441bb629b12b62345c98bJhIHSKIQr60Qs55jwj9Xp1E-Vo8ciOhlQMUi8ShQKFxvvLVfEa0xhJBmyKc6ng6";
+      
+      const map = new Map({
+      basemap: "arcgis-topographic", //Basemap layer service
+      ground: "world-elevation", //Elevation service
+    });
+      
+      const graphicsLayer = new GraphicsLayer();
+      
+      
+      
+      // Create a polygon geometry
+      const polygon1 = {
+        type: "polygon",
+        rings: [
+          [8.531020,47.388154], //lon.,lat.//1
+          [8.534437,47.386254], //2
+          [8.536336,47.385004], //3
+          [8.536433,47.385055], //4
+          [8.538085,47.384300], //5
+          [8.538665,47.383900], //6
+          [8.539169,47.383459], //7
+          [8.539094,47.383292], //8
+          [8.540035,47.382869], //9
+          [8.541867,47.379927], //10
+          [8.539119,47.379035], //11
+          [8.532559,47.378012], //12
+          [8.530018,47.379523], //13
+          [8.507846,47.395345], //14
+          [8.514949,47.394415], //15
+          [8.522459,47.392294], //16
+          [8.526192,47.390900], //17
+
+        ]
+      };
+      
+      // Create a polygon geometry 2
+      const polygon2 = {
+        type: "polygon",
+        rings: 
+        [
+          [8.538569 , 47.379377], //1
+          [8.539927 , 47.378869], //2
+          [8.539711 , 47.378628], //3
+          [8.541191 , 47.378255], //4
+          [8.541137 , 47.377940], //5
+          [8.541331 , 47.377875], //6
+          [8.541039 , 47.377275], //7
+          [8.542120 , 47.377150], //8
+          [8.542357 , 47.376763], //9
+          [8.542390 , 47.376199], //10
+          [8.542022 , 47.375460], //11
+          [8.541968 , 47.375387], //12
+          [8.541850 , 47.374612], //13
+          [8.541914 , 47.374518], //14
+          [8.541914 , 47.374321], //15
+          [8.541526 , 47.374262], //16
+          [8.541390 , 47.374010], //17
+          [8.541515 , 47.373834], //18
+          [8.541466 , 47.373337], //19
+          [8.541366 , 47.373289], //20
+          [8.541598 , 47.373169], //21
+          [8.541725 , 47.373020], //22
+          [8.541763 , 47.372653], //23
+          [8.541407 , 47.372296], //24
+          [8.541804 , 47.372225], //25
+          [8.541855 , 47.371336], //26
+          [8.541598 , 47.371292], //27
+          [8.541542 , 47.371032], //28
+          [8.541250 , 47.370571], //29
+          [8.541269 , 47.370313], //30
+          [8.541201 , 47.370236], //31
+          [8.541436 , 47.369981], //32
+          [8.542029 , 47.369921], //33
+          [8.541962 , 47.369334], //34
+          [8.542010 , 47.369275], //35
+          [8.542000 , 47.369234], //36
+          [8.541960 , 47.369075], //37
+          [8.541825 , 47.367515], //38
+          [8.541977 , 47.366958], //39
+          [8.542187 , 47.366849], //40
+          [8.542298 , 47.366616], //41
+          [8.542128 , 47.366488], //42
+          [8.542136 , 47.366397], //43
+          [8.544386 , 47.366533], //44
+          [8.544343 , 47.366624], //45
+          [8.544186 , 47.366836], //46
+          [8.543983 , 47.366914], //47
+          [8.543932 , 47.367163], //48
+          [8.544078 , 47.367326], //49
+          [8.544118 , 47.367449], //50
+          [8.544043 , 47.367593], //51
+          [8.544745 , 47.367774], //52
+          [8.544848 , 47.367692], //53
+          [8.545149 , 47.367937], //54
+          [8.545384 , 47.368025], //55
+          [8.545133 , 47.368233], //56
+          [8.544873 , 47.368398], //57
+          [8.544164 , 47.369107], //58
+          [8.543883 , 47.369304], //59
+          [8.543621 , 47.369668], //60
+          [8.543555 , 47.369752], //61
+          [8.543380 , 47.369682], //62
+          [8.543398 , 47.369555], //63
+          [8.543380 , 47.369490], //64
+          [8.543224 , 47.369443], //65
+          [8.543195 , 47.369442], //66
+          [8.542962 , 47.369944], //67
+          [8.542966 , 47.370021], //68
+          [8.543028 , 47.370071], //69
+          [8.543059 , 47.370138], //70
+          [8.542882 , 47.371362], //71
+          [8.542601 , 47.371348], //72
+          [8.542513 , 47.371622], //73
+          [8.542530 , 47.372308], //74
+          [8.543094 , 47.372325], //75
+          [8.543218 , 47.372525], //76
+          [8.543058 , 47.372803], //77
+          [8.543144 , 47.372856], //78
+          [8.543324 , 47.373194], //79
+          [8.543353 , 47.373563], //80
+          [8.543520 , 47.374096], //81
+          [8.543617 , 47.374279], //82
+          [8.544165 , 47.375546], //83
+          [8.544168 , 47.375985], //84
+          [8.543996 , 47.376261], //85
+          [8.543420 , 47.376256], //86
+          [8.543393 , 47.376514], //87
+          [8.543310 , 47.376645], //88
+          [8.543304 , 47.376639], //89
+          [8.543277 , 47.377075], //90
+          [8.542636 , 47.378381], //91
+          [8.542556 , 47.378415], //92
+          [8.541923 , 47.379913], //93
+          [8.541660 , 47.380305], //94
+          [8.540882 , 47.379826], //95
+          ]
+      };
+      
+      
+      const simpleFillSymbol = {
+        type: "simple-fill",
+        color: [58,173,148, 0.8],  // Orange, opacity 80%
+        outline: {
+          color: [55, 55, 55],
+          width: 1
+        }
+      };
+      
+      const popupTemplate = {
+        title: "{Name}",
+        content: "{Description}"
+      };
+      
+      const attributes = {
+        Name: "Flood danger zone",
+        Description: "Areas to be affected by floods when water level rises by 1-2 m"
+      };
+      
+      // add graphic for P1
+      const polygonGraphic1 = new Graphic({
+        geometry: polygon1,
+        symbol: simpleFillSymbol,
+        attributes: attributes,
+        popupTemplate: popupTemplate
+      });
+      
+      // add graphic for P2
+      const polygonGraphic2 = new Graphic({
+        geometry: polygon2,
+        symbol: simpleFillSymbol,
+        attributes: attributes,
+        popupTemplate: popupTemplate
+      });
+      
+      graphicsLayer.add(polygonGraphic1);
+      graphicsLayer.add(polygonGraphic2);
+      
+      // Create a line geometry to indicate cut-off point of polygon 1 (NW cut-off)
+      const polyline1 = {
+        type: "polyline",
+        paths: 
+        [
+          [8.507604,47.395413],
+          [8.530018,47.379523]
+        ]
+      };
+      
+      // Create a line geometry to indicate cut-off point of polygon 2 (SE cut-off)
+      const polyline2 = {
+        type: "polyline",
+        paths:
+        [
+          [8.536016,47.361379],
+          [8.548891,47.357609]
+        ]
+      };
+      
+      const simpleLineSymbol = {
+        type: "simple-line",
+        color: [40, 20, 240], // indigo
+        width: 2
+      };
+      
+      // create graphic for line 1
+      const polylineGraphic1 = new Graphic({
+        geometry: polyline1,
+        symbol: simpleLineSymbol
+      });
+      
+      // create graphic for line 2
+      const polylineGraphic2 = new Graphic({
+        geometry: polyline2,
+        symbol: simpleLineSymbol
+      });
+      
+      graphicsLayer.add(polylineGraphic1);
+      graphicsLayer.add(polylineGraphic2);
+      
+      const view = new SceneView({
+        container: "viewDiv",
+        map: map,
+        camera: {
+          position: {
+            x: 8.541, //Longitude //8.55 top-view //8.54 river-bed //8.538 city-center
+            y: 47.356, //Latitude //47.35 top-view //47.31,47.373 river-bed //47.36 city-center
+            z: 980 //Meters //20k top-view //10k,700 river-bed //880 city-center
+            // 8.54, 47.373, 700
+          },
+          tilt: 70 //5 top-view //35 river-bed //72 city-center
+        }
+      });
+      
+      const basemapToggle = new BasemapToggle({
+        view: view,
+        nextBasemap: "arcgis-imagery"
+      });
+      
+      view.ui.add(basemapToggle,"bottom-right");
+      
+      const basemapGallery = new BasemapGallery({
+        view: view,
+        source: 
+        {
+          query: 
+          {
+            title: '"World Basemaps for Developers" AND owner:esri'
+          }
+        }
+      });
+      
+      view.ui.add(basemapGallery, "top-right"); // Add to the view 
+      
+      // Define a pop-up for informing on flood-danger zones
+      const popupContour = {
+        "title": "Height (contour) Information of Zurich",
+        "content": "<b>Height:</b> {hoehe}<br><b>Countour length:</b> {Shape__Length}"
+      };   
+      // Define the feature layer for the pop-up
+      const contour = new FeatureLayer({
+        url: "https://services2.arcgis.com/cFEFS0EWrhfDeVw9/arcgis/rest/services/Zurich_Contour_Lines/FeatureServer/2",
+        outFields: ["hoehe","Shape_Length"],
+        popupTemplate: popupContour,
+      });
+      
+      // Define a pop-up for informing on seismic events including tsunamis
+      const popupSeismic = {
+        "title": "Info on Seismic Activity",
+        "content": "<b>eventType:</b> {eventType}<br><b>eventTime:</b> {eventTime}<br><b>place:</b> {place}<br><b>alert:</b> {alert}<br><b>updated:</b> {updated}<br><b>status:</b> {status}<br><b>detail:</b> {detail}<br><b>longitude:</b> {longitude}<br><b>latitude:</b> {latitude}<br><b>depth:</b> {depth}<br><b>tsunami:</b> {tsunami}"
+      };
+      // Define the feature layer for the pop-up
+      const seismic = new FeatureLayer({
+        url: "https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/services/USGS_Seismic_Data_v1/FeatureServer/0",
+        outFields: ["eventType", "eventTime", "place", "alert", "updated", "status", "detail", "longitude", "latitude", "depth", "tsunami"],
+        popupTemplate: popupSeismic,
+      });
+      
+      // Define a pop-up for gardens and the like around Zurich
+      const popupGarden = {
+        "title": "Parks & Gardens in Zurich",
+        "content": "<b>Description:</b> {typ}<br><b>Public/Private:</b> {einstufung}<br><b>Location:</b> {inventarad}<br><b>Status:</b> {schutzstat}<br><b>Details:</b> {bezeichnun}"
+      };   
+      // Define the feature layer for the pop-up
+      const garden = new FeatureLayer({
+        url: "https://services2.arcgis.com/cFEFS0EWrhfDeVw9/arcgis/rest/services/Zurich_Parks_Parcels/FeatureServer/0",
+        outFields: ["typ","einstufung","inventarad","schutzstat","bezeichnun"],
+        popupTemplate: popupGarden,
+      });
+      
+      // Define a pop-up for swiss glaciers to inform on potential flood-flow due to global warming
+      const popupGlacier = {
+        "title": "Swiss Glaciers",
+        "content": "<b>Glacier name:</b> {Name}<br><b> Area (potential water-flow):</b> {Shape__Area}"
+      };   
+      // Define the feature layer for the pop-up
+      const glacier = new FeatureLayer({
+        url: "https://services.arcgis.com/XSeYKQzfXnEgju9o/arcgis/rest/services/Swiss_glaciers/FeatureServer/0",
+        outFields: ["Name","Shape_Area"],
+        popupTemplate: popupGlacier,
+      });
+      
+      // add pop-ups to map // latest on top
+      map.add(seismic);
+      map.add(garden);
+      map.add(glacier);
+      
+      map.add(contour);
+      map.add(graphicsLayer);
+      
+    });
+  </script>
+
+</head>
+<body>
+  <div id="viewDiv"></div>
+</body>
+</html>
